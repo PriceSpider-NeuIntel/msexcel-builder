@@ -136,6 +136,9 @@ class Sheet
     else if typeof str == 'number'
       @data[row][col].v = str
       return @data[row][col].dataType = 'number'
+    else if typeof str == 'date'
+      @data[row][col].v = str
+      return @data[row][col].dataType = 'date'
     else
       @data[row][col].v = str
     return
@@ -210,6 +213,10 @@ class Sheet
             c.att('t','s')
             c.ele('v',''+(ix.v-1))
           else if ix.dataType == 'number'
+            c.ele 'v', ''+ix.v
+          else if ix.dataType == 'date'
+            c.att('t', 'd')
+            c.att('s', '1')
             c.ele 'v', ''+ix.v
 
     if @merges.length > 0
@@ -350,6 +357,9 @@ class Style
         e.att('applyAlignment','1')
         ea = e.ele('alignment',{textRotation:(if o.rotate is '-' then '0' else o.rotate),horizontal:(if o.align is '-' then 'left' else o.align), vertical:(if o.valign is '-' then 'top' else o.valign)})
         ea.att('wrapText','1') if o.wrap isnt '-'
+    # @@@
+    e = cs.ele('xf',{numFmtId:'22', xfId:'1'})
+    # @@@
     ss.ele('cellStyles',{count:'1'}).ele('cellStyle',{name:'常规',xfId:'0',builtinId:'0'})
     ss.ele('dxfs',{count:'0'})
     ss.ele('tableStyles',{count:'0',defaultTableStyle:'TableStyleMedium9',defaultPivotStyle:'PivotStyleLight16'})
