@@ -136,7 +136,7 @@ class Sheet
     else if typeof str == 'number'
       @data[row][col].v = str
       return @data[row][col].dataType = 'number'
-    else if typeof str == 'date'
+    else if str instanceof Date
       @data[row][col].v = str
       return @data[row][col].dataType = 'date'
     else
@@ -358,7 +358,7 @@ class Style
         ea = e.ele('alignment',{textRotation:(if o.rotate is '-' then '0' else o.rotate),horizontal:(if o.align is '-' then 'left' else o.align), vertical:(if o.valign is '-' then 'top' else o.valign)})
         ea.att('wrapText','1') if o.wrap isnt '-'
     # @@@
-    e = cs.ele('xf',{numFmtId:'22', xfId:'1'})
+    e = cs.ele('xf',{numFmtId:'22', fontId: '0', fillId: '0', borderId: '0', xfId:'1'})
     # @@@
     ss.ele('cellStyles',{count:'1'}).ele('cellStyle',{name:'常规',xfId:'0',builtinId:'0'})
     ss.ele('dxfs',{count:'0'})

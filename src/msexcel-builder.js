@@ -299,7 +299,7 @@
       } else if (typeof str === 'number') {
         this.data[row][col].v = str;
         return this.data[row][col].dataType = 'number';
-      } else if (typeof str === 'date') {
+      } else if (str instanceof Date) {
         this.data[row][col].v = str;
         return this.data[row][col].dataType = 'date';
       } else {
@@ -751,6 +751,9 @@
       }
       e = cs.ele('xf', {
         numFmtId: '22',
+        fontId: '0',
+        fillId: '0',
+        borderId: '0',
         xfId: '1'
       });
       ss.ele('cellStyles', {
