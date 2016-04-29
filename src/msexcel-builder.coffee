@@ -216,8 +216,8 @@ class Sheet
             c.ele 'v', ''+ix.v
           else if ix.dataType == 'date'
             c.att('t', 'd')
-            c.att('s', '1')
-            c.ele 'v', ''+ix.v
+            c.att('s', '2')
+            c.ele('v', ix.v.toISOString())
 
     if @merges.length > 0
       mc = ws.ele('mergeCells',{count:@merges.length})
@@ -357,9 +357,7 @@ class Style
         e.att('applyAlignment','1')
         ea = e.ele('alignment',{textRotation:(if o.rotate is '-' then '0' else o.rotate),horizontal:(if o.align is '-' then 'left' else o.align), vertical:(if o.valign is '-' then 'top' else o.valign)})
         ea.att('wrapText','1') if o.wrap isnt '-'
-    # @@@
-    e = cs.ele('xf',{numFmtId:'22', fontId: '0', fillId: '0', borderId: '0', xfId:'1'})
-    # @@@
+    e = cs.ele('xf',{numFmtId:'22', fontId: '0', fillId: '0', borderId: '0', xfId:'2'})
     ss.ele('cellStyles',{count:'1'}).ele('cellStyle',{name:'常规',xfId:'0',builtinId:'0'})
     ss.ele('dxfs',{count:'0'})
     ss.ele('tableStyles',{count:'0',defaultTableStyle:'TableStyleMedium9',defaultPivotStyle:'PivotStyleLight16'})
